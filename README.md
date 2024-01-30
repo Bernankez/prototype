@@ -7,3 +7,7 @@ My prototypes.
 ```sh
 $ pnpm add @bernankez/prototype
 ```
+
+## TODO
+
+- [ ] Code preview(Shiki)
