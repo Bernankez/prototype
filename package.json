@@ -1,0 +1,105 @@
+{
+  "name": "@bernankez/prototype",
+  "type": "module",
+  "version": "0.0.0",
+  "packageManager": "pnpm@8.15.1",
+  "description": "Prototypes",
+  "author": {
+    "name": "Cole",
+    "email": "bernankeic@gmail.com",
+    "url": "https://github.com/Bernankez"
+  },
+  "license": "MIT",
+  "homepage": "https://github.com/Bernankez/prototype#readme",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Bernankez/prototype.git"
+  },
+  "bugs": "https://github.com/Bernankez/prototype/issues",
+  "keywords": [],
+  "sideEffects": false,
+  "exports": {
+    ".": {
+      "require": "./dist/index.js",
+      "import": "./dist/index.mjs"
+    },
+    "./components": {
+      "types": "./dist/components/index.d.ts",
+      "require": "./dist/components/index.js",
+      "import": "./dist/components/index.mjs"
+    }
+  },
+  "main": "./dist/index.js",
+  "module": "./dist/index.mjs",
+  "types": "./dist/index.d.ts",
+  "typesVersions": {
+    "*": {
+      "*": [
+        "*",
+        "dist/*",
+        "dist/*.d.ts",
+        "dist/*/index.d.ts"
+      ]
+    }
+  },
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "prepare": "simple-git-hooks",
+    "prepublishOnly": "pnpm build",
+    "dev": "vite serve playground",
+    "dev:build": "vite build playground",
+    "dev:preview": "vite preview playground",
+    "build": "unbuild",
+    "release": "bumpp && pnpm publish",
+    "test": "vitest run",
+    "test:watch": "vitest run --coverage",
+    "typecheck": "vue-tsc --noEmit",
+    "lint": "eslint .",
+    "fix": "eslint . --fix"
+  },
+  "peerDependencies": {
+    "@vue/composition-api": "^1.0.0-rc.1",
+    "vue": "^2.0.0 || >=3.0.0"
+  },
+  "peerDependenciesMeta": {
+    "@vue/composition-api": {
+      "optional": true
+    }
+  },
+  "dependencies": {
+    "vue-demi": "latest"
+  },
+  "devDependencies": {
+    "@bernankez/eslint-config": "^0.7.4",
+    "@bernankez/stylelint-config": "^0.4.4",
+    "@iconify-json/lucide": "^1.1.160",
+    "@types/node": "^20.11.10",
+    "@vitejs/plugin-vue": "^5.0.3",
+    "@vue/tsconfig": "^0.5.1",
+    "bumpp": "^9.3.0",
+    "eslint": "^8.56.0",
+    "happy-dom": "^13.3.5",
+    "lint-staged": "^15.2.0",
+    "simple-git-hooks": "^2.9.0",
+    "stylelint": "^15.11.0",
+    "typescript": "^5.3.3",
+    "unbuild": "^2.0.0",
+    "unocss": "^0.58.4",
+    "vite": "^5.0.12",
+    "vite-plugin-vue-devtools": "^7.0.13",
+    "vitest": "^1.2.2",
+    "vue": "^3.4.15",
+    "vue-tsc": "^1.8.27"
+  },
+  "simple-git-hooks": {
+    "pre-commit": "pnpm lint-staged"
+  },
+  "lint-staged": {
+    "*": "eslint --fix"
+  },
+  "publishConfig": {
+    "access": "public"
+  }
+}
