@@ -1,24 +1,26 @@
 <template>
   <div>
-    <h2 class="font-bold text-7">
+    <h2 class="text-7 font-bold">
       {{ name }}
     </h2>
-    <div class="w-full rounded-sm b-2 b-solid b-primary overflow-hidden">
+    <div class="w-full overflow-hidden b-1 b-secondary rounded-sm b-solid">
       <div class="w-full bg-background p-3">
         <component :is="com" />
       </div>
-      <div class="flex justify-end text-5 gap-1 p-2">
+      <div class="flex justify-end gap-1 p-2 text-5">
         <a :href="`https://github.com/Bernankez/prototype/blob/master/src/components/${name}.vue`" target="_blank">
           <IconButton icon="i-lucide:github" title="Source" />
         </a>
         <IconButton icon="i-lucide:code" title="Code" @click="showDemoSource = !showDemoSource" />
       </div>
-      <div v-if="showDemoSource" class="group relative flex b-0 text-3.5 b-t-1 b-solid b-secondary p-3 overflow-auto">
-        <div class="highlighter w-full" v-html="innerHTML"></div>
-        <div class="absolute opacity-100 group-hover:opacity-0 transition right-3 top-3">
+      <div v-if="showDemoSource" class="group relative flex b-0 b-t-1 b-secondary b-solid bg-content text-3.5">
+        <div class="box-border overflow-auto p-3">
+          <div class="highlighter w-full" v-html="innerHTML"></div>
+        </div>
+        <div class="absolute right-3 top-3 opacity-100 transition group-hover:opacity-0">
           vue
         </div>
-        <IconButton class="absolute right-3 top-3 backdrop-saturate-50 backdrop-blur-8 bg-opacity-70 transition opacity-0 group-hover:opacity-100" title="Copy" :icon="icon" @click="() => { copy(); icon = 'i-lucide:check' }" />
+        <IconButton class="absolute right-3 top-3 bg-opacity-70 opacity-0 backdrop-blur-8 backdrop-saturate-50 transition group-hover:opacity-100" title="Copy" :icon="icon" @click="() => { copy(); icon = 'i-lucide:check' }" />
       </div>
     </div>
   </div>

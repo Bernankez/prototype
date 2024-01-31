@@ -1,5 +1,5 @@
 <template>
-  <div role="button" class="p-2 hover:bg-secondary transition rounded-sm cursor-pointer" @click="onClick">
+  <div role="button" class="cursor-pointer rounded-sm p-2 transition hover:bg-secondary" @click="onClick">
     <div class="text-4.5" :class="[icon]"></div>
   </div>
 </template>

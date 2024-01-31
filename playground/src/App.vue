@@ -1,8 +1,8 @@
 <template>
   <div class="flex px-6">
-    <div class="max-w-230 mx-auto w-full">
-      <div class="flex justify-between items-center">
-        <h1 class="font-bold text-10 font-italic">
+    <div class="mx-auto max-w-230 w-full">
+      <div class="flex items-center justify-between">
+        <h1 class="text-10 font-bold font-italic">
           Prototype
         </h1>
         <div class="flex items-center">
@@ -18,7 +18,7 @@
       <div class="flex">
         <ToggleBar v-model:active-item="activeItem" :items="items" />
       </div>
-      <div>
+      <div class="mt-2">
         <RouterView />
       </div>
     </div>

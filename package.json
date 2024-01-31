@@ -60,23 +60,17 @@
     "fix": "eslint . --fix"
   },
   "peerDependencies": {
-    "@vue/composition-api": "^1.0.0-rc.1",
-    "vue": "^2.0.0 || >=3.0.0"
-  },
-  "peerDependenciesMeta": {
-    "@vue/composition-api": {
-      "optional": true
-    }
+    "vue": ">=3.3.0"
   },
   "dependencies": {
     "@vueuse/core": "^10.7.2",
     "markdown-it": "^14.0.0",
     "markdown-it-katex": "^2.0.3",
-    "vue-demi": "latest",
     "vue-router": "^4.2.5"
   },
   "devDependencies": {
     "@bernankez/eslint-config": "^0.7.4",
+    "@bernankez/eslint-config-unocss": "^0.7.4",
     "@bernankez/stylelint-config": "^0.4.4",
     "@iconify-json/lucide": "^1.1.160",
     "@shikijs/markdown-it": "1.0.0-beta.1",

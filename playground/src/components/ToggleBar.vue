@@ -1,12 +1,12 @@
 <template>
-  <div class="relative w-full bg-secondary text-secondary-foreground rounded-sm overflow-hidden">
-    <div :style="{ width, transform: `translateX(${translateX})` }" class="p-1 absolute h-full rounded-sm transition-300">
-      <div class="bg-primary h-full rounded-sm">
+  <div class="relative w-full overflow-hidden rounded-sm bg-secondary text-secondary-foreground">
+    <div :style="{ width, transform: `translateX(${translateX})` }" class="absolute h-full rounded-sm p-1 transition-300">
+      <div class="h-full rounded-sm bg-primary">
         {{ " " }}
       </div>
     </div>
     <div class="flex">
-      <div v-for="item in props.items" :key="item.value" class="z-1 flex justify-center items-center flex-1 py-2.5 cursor-pointer transition-300" :class="[activeItem === item.value ? 'text-primary-foreground font-bold' : '']" @click="onItem(item)">
+      <div v-for="item in props.items" :key="item.value" class="z-1 flex flex-1 cursor-pointer items-center justify-center py-2.5 transition-300" :class="[activeItem === item.value ? 'text-primary-foreground font-bold' : '']" @click="onItem(item)">
         {{ item.label }}
       </div>
     </div>

@@ -6,6 +6,6 @@
       "@/*": ["src/*"],
       "~": ["./*"],
       "@bernankez/prototype": ["../src/index.ts"]
-    },
+    }
   }
 }

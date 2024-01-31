@@ -13,6 +13,10 @@ const innerHTML = codeToHtml(Readme);
 
 <style scoped>
 :global(.prose pre) {
-  background-color: transparent !important;
+  background-color: var(--content) !important;
+}
+
+:global(.prose) {
+  max-width: unset;
 }
 </style>
