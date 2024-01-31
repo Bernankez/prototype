@@ -69,19 +69,28 @@
     }
   },
   "dependencies": {
-    "vue-demi": "latest"
+    "@vueuse/core": "^10.7.2",
+    "markdown-it": "^14.0.0",
+    "markdown-it-katex": "^2.0.3",
+    "vue-demi": "latest",
+    "vue-router": "^4.2.5"
   },
   "devDependencies": {
     "@bernankez/eslint-config": "^0.7.4",
     "@bernankez/stylelint-config": "^0.4.4",
     "@iconify-json/lucide": "^1.1.160",
+    "@shikijs/markdown-it": "1.0.0-beta.1",
+    "@shikijs/twoslash": "1.0.0-beta.1",
+    "@types/markdown-it": "^13.0.7",
     "@types/node": "^20.11.10",
+    "@unocss/reset": "^0.58.4",
     "@vitejs/plugin-vue": "^5.0.3",
     "@vue/tsconfig": "^0.5.1",
     "bumpp": "^9.3.0",
     "eslint": "^8.56.0",
     "happy-dom": "^13.3.5",
     "lint-staged": "^15.2.0",
+    "shiki": "1.0.0-beta.1",
     "simple-git-hooks": "^2.9.0",
     "stylelint": "^15.11.0",
     "typescript": "^5.3.3",

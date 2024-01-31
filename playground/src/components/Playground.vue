@@ -1,24 +1,34 @@
 <template>
   <div>
-    <h2>{{ name }}</h2>
+    <h2 class="font-bold text-7">
+      {{ name }}
+    </h2>
     <div class="w-full rounded-sm b-2 b-solid b-primary overflow-hidden">
       <div class="w-full bg-background p-3">
         <component :is="com" />
       </div>
-      <div class="flex justify-end text-5 gap-1">
-        <IconButton icon="i-lucide:github" title="Source" />
+      <div class="flex justify-end text-5 gap-1 p-2">
+        <a :href="`https://github.com/Bernankez/prototype/blob/master/src/components/${name}.vue`" target="_blank">
+          <IconButton icon="i-lucide:github" title="Source" />
+        </a>
         <IconButton icon="i-lucide:code" title="Code" @click="showDemoSource = !showDemoSource" />
       </div>
-      <div v-if="showDemoSource">
-        <pre>{{ demoSource }}</pre>
+      <div v-if="showDemoSource" class="group relative flex b-0 text-3.5 b-t-1 b-solid b-secondary p-3 overflow-auto">
+        <div class="highlighter w-full" v-html="innerHTML"></div>
+        <div class="absolute opacity-100 group-hover:opacity-0 transition right-3 top-3">
+          vue
+        </div>
+        <IconButton class="absolute right-3 top-3 backdrop-saturate-50 backdrop-blur-8 bg-opacity-70 transition opacity-0 group-hover:opacity-100" title="Copy" :icon="icon" @click="() => { copy(); icon = 'i-lucide:check' }" />
       </div>
     </div>
   </div>
 </template>
 
 <script setup lang="ts">
-import { type Component, ref, shallowRef, watchEffect } from "vue-demi";
+import { type Component, ref, shallowRef, watchEffect } from "vue";
+import { refAutoReset, useClipboard } from "@vueuse/core";
 import IconButton from "./IconButton.vue";
+import { useHighlighter } from "@/composables/useHighlighter";
 
 const props = defineProps<{
   name: string;
@@ -30,7 +40,13 @@ const components = import.meta.glob("../demos/*.vue");
 const demoSources = import.meta.glob("../demos/*.vue", { as: "raw" });
 
 const com = shallowRef<Component>();
-const demoSource = ref<string>();
+const demoSource = ref("");
+
+const { codeToHtml } = useHighlighter();
+const innerHTML = codeToHtml(demoSource, "vue");
+
+const icon = refAutoReset("i-lucide:clipboard-copy", 1500);
+const { copy } = useClipboard({ source: demoSource, legacy: true });
 
 async function loadComponent() {
   if (components[`../demos/${props.name}.vue`]) {
@@ -50,3 +66,9 @@ watchEffect(() => {
   }
 });
 </script>
+
+<style scoped>
+:deep(.highlighter pre) {
+  background-color: transparent !important;
+}
+</style>
