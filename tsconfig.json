@@ -1,8 +1,12 @@
 {
   "extends": "@vue/tsconfig/tsconfig.dom.json",
   "compilerOptions": {
+    "baseUrl": "./",
     "paths": {
+      "@/*": ["playground/src/*"],
+      "~": ["playground/*"],
       "@bernankez/prototype": ["./src"]
     }
-  }
+  },
+  "exclude": ["dist"]
 }
