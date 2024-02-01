@@ -9,6 +9,9 @@
           <a href="https://github.com/Bernankez/prototype/releases" target="_blank" class="cursor-pointer p-2 font-semibold">
             v{{ version }}
           </a>
+          <a href="https://keke.cc/" target="_blank">
+            <IconButton icon="i-lucide:home" title="Homepage" />
+          </a>
           <a href="https://github.com/Bernankez/prototype" target="_blank">
             <IconButton icon="i-lucide:github" title="GitHub" />
           </a>
@@ -18,7 +21,7 @@
       <div class="flex">
         <ToggleBar v-model:active-item="activeItem" :items="items" />
       </div>
-      <div class="mt-2">
+      <div class="mt-2 pb-6">
         <RouterView />
       </div>
     </div>
