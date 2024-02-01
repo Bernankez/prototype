@@ -2,7 +2,7 @@
 
 My prototypes.
 
-*This is not a component library, it's just a collection of component prototypes. You can either import them directly or copy the source code to use in your project.*
+*This is not a component library, it's just a collection of prototypes. You can either import them directly or copy the source code to use in your project.*
 
 ## Install
 

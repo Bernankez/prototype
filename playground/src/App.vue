@@ -28,7 +28,7 @@
 <script setup lang="ts">
 import { RouterView, useRouter } from "vue-router";
 import { useToggle } from "@vueuse/core";
-import { computed, ref } from "vue";
+import { ref, watch } from "vue";
 import { version } from "../../package.json";
 import IconButton from "./components/IconButton.vue";
 import ToggleBar from "./components/ToggleBar.vue";
@@ -42,8 +42,11 @@ const items = ref([
 ]);
 
 const router = useRouter();
-const activeItem = computed({
-  get: () => router.currentRoute.value.path,
-  set: value => router.push(value),
+const activeItem = ref(location.pathname);
+watch(activeItem, (value) => {
+  router.push(value);
+});
+watch(() => router.currentRoute.value.path, (value) => {
+  activeItem.value = value;
 });
 </script>
