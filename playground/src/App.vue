@@ -1,5 +1,5 @@
 <template>
-  <div class="flex px-6">
+  <div class="flex px-3">
     <div class="mx-auto max-w-230 w-full">
       <div class="flex items-center justify-between">
         <h1 class="text-10 font-bold font-italic">
