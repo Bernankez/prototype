@@ -21,6 +21,7 @@
 <script setup lang="ts">
 import { computed, ref } from "vue";
 import { useMergedState } from "../composables/useMergedState";
+import { isDefined } from "../utils/is";
 
 const props = withDefaults(defineProps<{
   defaultCollapsed?: boolean;
@@ -40,7 +41,7 @@ const emit = defineEmits<{
 
 const controlled = computed({
   get: () => props.modelValue,
-  set: c => c && emit("update:modelValue", c),
+  set: c => isDefined(c) && emit("update:modelValue", c),
 });
 
 const uncontrolled = ref(props.defaultCollapsed);
