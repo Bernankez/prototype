@@ -7,21 +7,25 @@
       <div class="w-full bg-background p-3">
         <component :is="com" />
       </div>
-      <div class="flex justify-end gap-1 p-2 text-5">
-        <a :href="`https://github.com/Bernankez/prototype/blob/master/src/components/${name}.vue`" target="_blank">
-          <IconButton icon="i-lucide:github" title="Source" />
-        </a>
-        <IconButton icon="i-lucide:code" title="Code" @click="showDemoSource = !showDemoSource" />
-      </div>
-      <div v-if="showDemoSource" class="group relative flex b-0 b-t-1 b-secondary b-solid bg-content text-3.5">
-        <div class="box-border overflow-auto p-3">
-          <div class="highlighter w-full" v-html="innerHTML"></div>
+      <Collapse :model-value="!showDemoSource">
+        <template #summary>
+          <div class="flex justify-end gap-1 p-2 text-5">
+            <a :href="`https://github.com/Bernankez/prototype/blob/master/src/components/${name}.vue`" target="_blank">
+              <IconButton icon="i-lucide:github" title="Source" />
+            </a>
+            <IconButton icon="i-lucide:code" title="Code" @click="showDemoSource = !showDemoSource" />
+          </div>
+        </template>
+        <div class="group relative flex b-0 b-t-1 b-secondary b-solid bg-content text-3.5">
+          <div class="box-border w-0 flex-1 overflow-auto p-3">
+            <div class="highlighter w-full" v-html="innerHTML"></div>
+          </div>
+          <div class="absolute right-3 top-3 opacity-100 transition group-hover:opacity-0">
+            vue
+          </div>
+          <IconButton class="absolute right-3 top-3 bg-opacity-70 opacity-0 backdrop-blur-8 backdrop-saturate-50 transition group-hover:opacity-100" title="Copy" :icon="icon" @click="() => { copy(); icon = 'i-lucide:check' }" />
         </div>
-        <div class="absolute right-3 top-3 opacity-100 transition group-hover:opacity-0">
-          vue
-        </div>
-        <IconButton class="absolute right-3 top-3 bg-opacity-70 opacity-0 backdrop-blur-8 backdrop-saturate-50 transition group-hover:opacity-100" title="Copy" :icon="icon" @click="() => { copy(); icon = 'i-lucide:check' }" />
-      </div>
+      </Collapse>
     </div>
   </div>
 </template>
@@ -29,6 +33,7 @@
 <script setup lang="ts">
 import { type Component, ref, shallowRef, watchEffect } from "vue";
 import { refAutoReset, useClipboard } from "@vueuse/core";
+import Collapse from "./Collapse.vue";
 import IconButton from "./IconButton.vue";
 import { useHighlighter } from "@/composables/useHighlighter";
 
