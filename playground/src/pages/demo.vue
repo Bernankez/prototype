@@ -3,6 +3,7 @@
     <Playground name="Bubble" />
     <Playground name="Collapse" />
     <Playground name="CyberButton" />
+    <Playground name="Toggle" />
   </div>
 </template>
 
