@@ -1,6 +1,8 @@
 # Prototype
 
-My prototypes.
+[*Document*](https://prototype.keke.cc)
+
+My prototypes. 
 
 *This is not a component library, it's just a collection of prototypes. You can either import them directly or copy the source code to use in your project.*
 
