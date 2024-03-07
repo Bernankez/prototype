@@ -1,18 +1,17 @@
 <template>
   <div
-    class="collapse grid overflow-hidden rounded-2 bg-gray-50 dark:bg-dark-800"
-    :class="[collapsed ? 'p-b-0 grid-rows-[auto_0fr]' : 'p-b-5 grid-rows-[auto_1fr]']"
+    class="collapse"
+    :class="[collapsed ? 'collapse-collapsed' : 'collapse-not-collapsed']"
   >
-    <div class="z-1 flex cursor-pointer justify-between p-5" @click="collapsed = !collapsed">
-      <div class="w-full">
+    <div class="summary" @click="collapsed = !collapsed">
+      <div :style="{ width: '100%' }">
         <slot name="summary" :collapsed="collapsed">
           {{ title }}
-          <span class="m-l-2 align-end text-3.5 text-neutral-400">{{ desc }}</span>
+          <span class="description">{{ desc }}</span>
         </slot>
       </div>
-      <div class="i-icon-park-outline:right text-5 transition" :class="[collapsed ? '' : 'rotate-90']"></div>
     </div>
-    <div class="content p-x-5" :class="[collapsed ? 'opacity-0 min-h-0' : 'min-h-fit']">
+    <div class="content" :class="[collapsed ? 'content-collapsed' : 'content-not-collapsed ']">
       <slot :collapsed="collapsed"></slot>
     </div>
   </div>
@@ -53,14 +52,77 @@ const collapsed = useMergedState(controlled, uncontrolled);
 
 <style scoped>
 .collapse {
+  display: grid;
+  border-radius: 0.5rem;
+  overflow: hidden;
+  background-color: rgb(249 250 251);
   transition-timing-function: ease-in-out;
   transition-duration: v-bind(duration);
   transition-property: padding, grid-template-rows;
 }
 
+.dark .collapse {
+  background-color: rgb(24 24 24);
+}
+
+.collapse-collapsed {
+  grid-template-rows: auto 0fr;
+  padding-bottom: 0;
+}
+
+.collapse-not-collapsed {
+  grid-template-rows: auto 1fr;
+  padding-bottom: 1.25rem;
+}
+
+.summary {
+  z-index: 1;
+  display: flex;
+  justify-content: space-between;
+  padding: 1.25rem;
+  cursor: pointer;
+}
+
+.description {
+  margin-left: 0.5rem;
+  color: rgb(163 163 163 / var(--un-text-opacity));
+  font-size: 0.875rem;
+  vertical-align: bottom;
+}
+
+.arrow {
+  font-size: 1.25rem;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  transition-duration: 150ms;
+  transition-property:
+    color,
+    background-color,
+    border-color,
+    outline-color,
+    text-decoration-color,
+    fill,
+    stroke,
+    opacity,
+    box-shadow,
+    transform,
+    filter,
+    backdrop-filter;
+}
+
 .content {
+  padding-right: 1.25rem;
+  padding-left: 1.25rem;
   transition-timing-function: ease-in-out;
   transition-duration: v-bind(duration);
   transition-property: opacity;
+}
+
+.content-collapsed {
+  min-height: 0;
+  opacity: 0;
+}
+
+.content-not-collapsed {
+  min-height: fit-content;
 }
 </style>
