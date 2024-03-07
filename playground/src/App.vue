@@ -46,9 +46,6 @@ const items = ref([
 
 const router = useRouter();
 const activeItem = ref(location.pathname);
-watch(activeItem, (value) => {
-  router.push(value);
-});
 watch(() => router.currentRoute.value.path, (value) => {
   activeItem.value = value;
 });

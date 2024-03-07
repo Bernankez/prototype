@@ -6,9 +6,9 @@
       </div>
     </div>
     <div class="flex">
-      <div v-for="item in props.items" :key="item.value" class="z-1 flex flex-1 cursor-pointer items-center justify-center py-2.5 transition-300" :class="[activeItem === item.value ? 'text-primary-foreground font-bold' : '']" @click="onItem(item)">
+      <RouterLink v-for="item in props.items" :key="item.value" :to="item.value" class="z-1 flex flex-1 cursor-pointer items-center justify-center py-2.5 transition-300" :class="[activeItem === item.value ? 'text-primary-foreground font-bold' : '']">
         {{ item.label }}
-      </div>
+      </RouterLink>
     </div>
   </div>
 </template>
@@ -17,12 +17,8 @@
 import { computed } from "vue";
 
 const props = defineProps<{
-  items?: { label: string | number; value: string | number }[];
+  items?: { label: string | number; value: string }[];
   activeItem?: string | number;
-}>();
-
-const emit = defineEmits<{
-  "update:activeItem": [value: string | number];
 }>();
 
 const width = computed(() => `${100 / (props.items?.length || 1)}%`);
@@ -30,8 +26,4 @@ const translateX = computed(() => {
   const activeIndex = props.items?.findIndex(item => item.value === props.activeItem) || 0;
   return `${activeIndex * 100}%`;
 });
-
-function onItem(item: { label: string | number; value: string | number }) {
-  emit("update:activeItem", item.value);
-}
 </script>

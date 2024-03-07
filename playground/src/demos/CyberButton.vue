@@ -1,5 +1,5 @@
 <template>
-  <div class="flex flex-col gap-3">
+  <div class="flex gap-3">
     <CyberButton>CyberPunk</CyberButton>
     <CyberButton text="This is CyberButton" />
   </div>
