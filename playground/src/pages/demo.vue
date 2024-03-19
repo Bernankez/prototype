@@ -2,8 +2,9 @@
   <div class="flex flex-col gap-3">
     <Playground name="Bubble" />
     <Playground name="Collapse" />
-    <Playground name="CyberButton" />
+    <!-- <Playground name="CyberButton" /> -->
     <Playground name="Toggle" />
+    <Playground name="FlowWallpaper" />
   </div>
 </template>
 
