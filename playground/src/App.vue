@@ -1,3 +1,26 @@
+<script setup lang="ts">
+import { RouterView, useRouter } from "vue-router";
+import { useToggle } from "@vueuse/core";
+import { ref, watch } from "vue";
+import { version } from "../../package.json";
+import IconButton from "./components/IconButton.vue";
+import ToggleBar from "./components/ToggleBar.vue";
+import { isDark } from "@/shared/isDark";
+
+const toggle = useToggle(isDark);
+
+const items = ref([
+  { label: "Guide", value: "/" },
+  { label: "Demo", value: "/demo" },
+]);
+
+const router = useRouter();
+const activeItem = ref(location.pathname);
+watch(() => router.currentRoute.value.path, (value) => {
+  activeItem.value = value;
+});
+</script>
+
 <template>
   <div class="flex px-3">
     <div class="mx-auto max-w-230 w-full">
@@ -27,26 +50,3 @@
     </div>
   </div>
 </template>
-
-<script setup lang="ts">
-import { RouterView, useRouter } from "vue-router";
-import { useToggle } from "@vueuse/core";
-import { ref, watch } from "vue";
-import { version } from "../../package.json";
-import IconButton from "./components/IconButton.vue";
-import ToggleBar from "./components/ToggleBar.vue";
-import { isDark } from "@/shared/isDark";
-
-const toggle = useToggle(isDark);
-
-const items = ref([
-  { label: "Guide", value: "/" },
-  { label: "Demo", value: "/demo" },
-]);
-
-const router = useRouter();
-const activeItem = ref(location.pathname);
-watch(() => router.currentRoute.value.path, (value) => {
-  activeItem.value = value;
-});
-</script>

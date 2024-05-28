@@ -1,22 +1,3 @@
-<template>
-  <div
-    class="collapse"
-    :class="[collapsed ? 'collapse-collapsed' : 'collapse-not-collapsed']"
-  >
-    <div class="summary" @click="collapsed = !collapsed">
-      <div :style="{ width: '100%' }">
-        <slot name="summary" :collapsed="collapsed">
-          {{ title }}
-          <span class="description">{{ desc }}</span>
-        </slot>
-      </div>
-    </div>
-    <div class="content" :class="[collapsed ? 'content-collapsed' : 'content-not-collapsed ']">
-      <slot :collapsed="collapsed"></slot>
-    </div>
-  </div>
-</template>
-
 <script setup lang="ts">
 import { computed, ref } from "vue";
 import { useMergedState } from "../composables/useMergedState";
@@ -35,7 +16,7 @@ const props = withDefaults(defineProps<{
 });
 
 const emit = defineEmits<{
-  "update:modelValue": [collapsed:boolean];
+  "update:modelValue": [collapsed: boolean];
 }>();
 
 const controlled = computed({
@@ -49,6 +30,25 @@ const duration = computed(() => typeof props.duration === "number" ? `${props.du
 
 const collapsed = useMergedState(controlled, uncontrolled);
 </script>
+
+<template>
+  <div
+    class="collapse"
+    :class="[collapsed ? 'collapse-collapsed' : 'collapse-not-collapsed']"
+  >
+    <div class="summary" @click="collapsed = !collapsed">
+      <div :style="{ width: '100%' }">
+        <slot name="summary" :collapsed="collapsed">
+          {{ title }}
+          <span class="description">{{ desc }}</span>
+        </slot>
+      </div>
+    </div>
+    <div class="content" :class="[collapsed ? 'content-collapsed' : 'content-not-collapsed ']">
+      <slot :collapsed="collapsed"></slot>
+    </div>
+  </div>
+</template>
 
 <style scoped>
 .collapse {
@@ -94,18 +94,8 @@ const collapsed = useMergedState(controlled, uncontrolled);
   font-size: 1.25rem;
   transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
   transition-duration: 150ms;
-  transition-property:
-    color,
-    background-color,
-    border-color,
-    outline-color,
-    text-decoration-color,
-    fill,
-    stroke,
-    opacity,
-    box-shadow,
-    transform,
-    filter,
+  transition-property: color, background-color, border-color, outline-color,
+    text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter,
     backdrop-filter;
 }
 

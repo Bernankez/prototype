@@ -1,9 +1,3 @@
-<template>
-  <div class="bubble w-fit">
-    <slot></slot>
-  </div>
-</template>
-
 <script setup lang="ts">
 import { computed } from "vue";
 
@@ -28,14 +22,24 @@ const dark = computed(() => ({
 const animationDuration = computed(() => typeof props.animationDuration === "number" ? `${props.animationDuration}s` : props.animationDuration);
 </script>
 
+<template>
+  <div class="bubble w-fit">
+    <slot></slot>
+  </div>
+</template>
+
 <style scoped>
 .bubble {
   --shadow-inset: v-bind("light['--shadow-inset']");
   --shadow: v-bind("light['--shadow']");
 
   border-radius: 50%;
-  box-shadow: 0 0 0.428vw 0 var(--shadow-inset) inset, 0 0 0.428vw 0 var(--shadow);
-  animation: ease-in-out infinite, linear infinite;
+  box-shadow:
+    0 0 0.428vw 0 var(--shadow-inset) inset,
+    0 0 0.428vw 0 var(--shadow);
+  animation:
+    ease-in-out infinite,
+    linear infinite;
   animation-name: radius-1, scale-1;
   animation-duration: v-bind(animationDuration);
 }

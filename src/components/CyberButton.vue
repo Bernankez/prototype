@@ -1,15 +1,3 @@
-<template>
-  <div class="cyber-button-wrapper">
-    <link href="https://fonts.gstatic.com" />
-    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap" rel="stylesheet" />
-    <button class="cyber-button" @click="click">
-      <slot>
-        {{ text }}
-      </slot>
-    </button>
-  </div>
-</template>
-
 <script setup lang="ts">
 import { type VNode, computed, createTextVNode, useSlots, withDefaults } from "vue";
 
@@ -45,6 +33,18 @@ function click(e: MouseEvent) {
 }
 </script>
 
+<template>
+  <div class="cyber-button-wrapper">
+    <link href="https://fonts.gstatic.com" />
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap" rel="stylesheet" />
+    <button class="cyber-button" @click="click">
+      <slot>
+        {{ text }}
+      </slot>
+    </button>
+  </div>
+</template>
+
 <style scoped>
 .cyber-button-wrapper {
   --slice-0: inset(50% 50% 50% 50%);
@@ -73,8 +73,16 @@ function click(e: MouseEvent) {
   position: absolute;
   inset: 0;
   display: block;
-  text-shadow: -3px -3px 0 #f8f005, 3px 3px 0 #00e6f6;
-  background: linear-gradient(45deg, transparent 3%, #00e6f6 3%, #00e6f6 5%, #ff013c 5%);
+  text-shadow:
+    -3px -3px 0 #f8f005,
+    3px 3px 0 #00e6f6;
+  background: linear-gradient(
+    45deg,
+    transparent 3%,
+    #00e6f6 3%,
+    #00e6f6 5%,
+    #ff013c 5%
+  );
   content: v-bind(computedText);
   clip-path: var(--slice-0);
 }

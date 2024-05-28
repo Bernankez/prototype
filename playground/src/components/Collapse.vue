@@ -1,3 +1,36 @@
+<script setup lang="ts">
+import { computed, ref } from "vue";
+import { useMergedState } from "../../../src/composables/useMergedState";
+import { isDefined } from "../../../src/utils/is";
+
+const props = withDefaults(defineProps<{
+  defaultCollapsed?: boolean;
+  modelValue?: boolean;
+  duration?: number | string;
+  title?: string;
+  desc?: string;
+}>(), {
+  modelValue: undefined,
+  defaultCollapsed: true,
+  duration: 0.2,
+});
+
+const emit = defineEmits<{
+  "update:modelValue": [collapsed: boolean];
+}>();
+
+const controlled = computed({
+  get: () => props.modelValue,
+  set: c => isDefined(c) && emit("update:modelValue", c),
+});
+
+const uncontrolled = ref(props.defaultCollapsed);
+
+const duration = computed(() => typeof props.duration === "number" ? `${props.duration}s` : props.duration);
+
+const collapsed = useMergedState(controlled, uncontrolled);
+</script>
+
 <template>
   <div
     class="collapse grid overflow-hidden rounded-2"
@@ -17,39 +50,6 @@
     </div>
   </div>
 </template>
-
-<script setup lang="ts">
-import { computed, ref } from "vue";
-import { useMergedState } from "../../../src/composables/useMergedState";
-import { isDefined } from "../../../src/utils/is";
-
-const props = withDefaults(defineProps<{
-  defaultCollapsed?: boolean;
-  modelValue?: boolean;
-  duration?: number | string;
-  title?: string;
-  desc?: string;
-}>(), {
-  modelValue: undefined,
-  defaultCollapsed: true,
-  duration: 0.2,
-});
-
-const emit = defineEmits<{
-  "update:modelValue": [collapsed:boolean];
-}>();
-
-const controlled = computed({
-  get: () => props.modelValue,
-  set: c => isDefined(c) && emit("update:modelValue", c),
-});
-
-const uncontrolled = ref(props.defaultCollapsed);
-
-const duration = computed(() => typeof props.duration === "number" ? `${props.duration}s` : props.duration);
-
-const collapsed = useMergedState(controlled, uncontrolled);
-</script>
 
 <style scoped>
 .collapse {

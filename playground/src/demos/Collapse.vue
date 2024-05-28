@@ -1,3 +1,7 @@
+<script setup lang="ts">
+import { Collapse } from "@bernankez/prototype";
+</script>
+
 <template>
   <div class="flex flex-col gap-3">
     <Collapse title="Collapse Title" desc="short description">
@@ -17,7 +21,3 @@
     </Collapse>
   </div>
 </template>
-
-<script setup lang="ts">
-import { Collapse } from "@bernankez/prototype";
-</script>

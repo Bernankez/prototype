@@ -1,3 +1,7 @@
+<script setup lang="ts">
+import { Bubble } from "@bernankez/prototype";
+</script>
+
 <template>
   <div class="flex items-center gap-3">
     <Bubble class="p-5">
@@ -11,7 +15,3 @@
     </Bubble>
   </div>
 </template>
-
-<script setup lang="ts">
-import { Bubble } from "@bernankez/prototype";
-</script>
