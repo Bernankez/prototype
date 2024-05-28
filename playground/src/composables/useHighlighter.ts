@@ -22,7 +22,7 @@ export function useHighlighter() {
         return "";
       }
       if (!highlighter.value) {
-        return toValue(code);
+        return `<pre>${toValue(code)}</pre>`;
       }
       return highlighter.value.codeToHtml(toValue(code)!, {
         lang: toValue(lang) || "",
