@@ -8,5 +8,6 @@ import Playground from "@/components/Playground.vue";
     <Playground name="Collapse" />
     <Playground name="CyberButton" />
     <Playground name="Toggle" />
+    <Playground name="Button" />
   </div>
 </template>

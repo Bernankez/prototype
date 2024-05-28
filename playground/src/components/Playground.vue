@@ -12,7 +12,7 @@ const props = defineProps<{
 const showDemoSource = ref(false);
 
 const components = import.meta.glob("../demos/*.vue");
-const demoSources = import.meta.glob("../demos/*.vue", { as: "raw" });
+const demoSources = import.meta.glob("../demos/*.vue", { query: "?raw", import: "default" });
 
 const com = shallowRef<Component>();
 const demoSource = ref("");
