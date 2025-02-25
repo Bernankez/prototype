@@ -9,5 +9,6 @@ import Playground from "@/components/Playground.vue";
     <Playground name="CyberButton" />
     <Playground name="Toggle" />
     <Playground name="Button" />
+    <Playground name="Split" />
   </div>
 </template>
