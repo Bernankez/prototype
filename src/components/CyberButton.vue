@@ -1,5 +1,6 @@
 <script setup lang="ts">
-import { type VNode, computed, createTextVNode, useSlots, withDefaults } from "vue";
+import type { VNode } from "vue";
+import { computed, createTextVNode, useSlots } from "vue";
 
 const props = withDefaults(defineProps<{
   text?: string;
@@ -76,13 +77,7 @@ function click(e: MouseEvent) {
   text-shadow:
     -3px -3px 0 #f8f005,
     3px 3px 0 #00e6f6;
-  background: linear-gradient(
-    45deg,
-    transparent 3%,
-    #00e6f6 3%,
-    #00e6f6 5%,
-    #ff013c 5%
-  );
+  background: linear-gradient(45deg, transparent 3%, #00e6f6 3%, #00e6f6 5%, #ff013c 5%);
   content: v-bind(computedText);
   clip-path: var(--slice-0);
 }

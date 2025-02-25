@@ -1,7 +1,7 @@
 <script setup lang="ts">
+import { isDark } from "@/shared/isDark";
 import { Toggle } from "@bernankez/prototype";
 import { ref } from "vue";
-import { isDark } from "@/shared/isDark";
 
 const value = ref(1);
 </script>

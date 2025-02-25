@@ -1,6 +1,8 @@
-import { type MaybeRefOrGetter, computed, shallowRef, toValue } from "vue";
-import { type BundledLanguage, type BundledTheme, type HighlighterGeneric, bundledLanguages, getHighlighter } from "shiki/bundle/web";
+import type { BundledLanguage, BundledTheme, HighlighterGeneric } from "shiki/bundle/web";
+import type { MaybeRefOrGetter } from "vue";
 import { isDark } from "@/shared/isDark";
+import { bundledLanguages, createHighlighter } from "shiki/bundle/web";
+import { computed, shallowRef, toValue } from "vue";
 
 const highlighter = shallowRef<HighlighterGeneric<BundledLanguage, BundledTheme>>();
 export function useHighlighter() {
@@ -8,7 +10,7 @@ export function useHighlighter() {
     if (highlighter.value) {
       return;
     }
-    highlighter.value = await getHighlighter({
+    highlighter.value = await createHighlighter({
       langs: Object.keys(bundledLanguages),
       themes: ["vitesse-dark", "vitesse-light"],
     });

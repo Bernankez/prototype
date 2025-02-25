@@ -1,6 +1,6 @@
 <script setup lang="ts">
-import Readme from "../../../README.md?raw";
 import { useMarkdownIt } from "@/composables/useMarkdownIt";
+import Readme from "../../../README.md?raw";
 
 const { codeToHtml } = useMarkdownIt();
 const innerHTML = codeToHtml(Readme);

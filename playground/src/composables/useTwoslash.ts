@@ -1,16 +1,17 @@
+import type { MaybeRefOrGetter } from "vue";
+import { isDark } from "@/shared/isDark";
 // @ts-expect-error no type definition
 import { createTransformerFactory, rendererRich } from "https://esm.sh/@shikijs/twoslash@1.0.0-beta.1/core";
 // @ts-expect-error no type definition
 import { codeToHtml as _codeToHtml } from "https://esm.sh/shiki@1.0.0-beta.1";
 // @ts-expect-error no type definition
+import { createTwoslashFromCDN } from "https://esm.sh/twoslash-cdn@0.1.0";
+// @ts-expect-error no type definition
 import { createStorage } from "https://esm.sh/unstorage@1.10.1";
 // @ts-expect-error no type definition
 import indexedDbDriver from "https://esm.sh/unstorage@1.10.1/drivers/indexedb";
-// @ts-expect-error no type definition
-import { createTwoslashFromCDN } from "https://esm.sh/twoslash-cdn@0.1.0";
+import { ref, shallowRef, toValue, watch } from "vue";
 import "@shikijs/twoslash/style-rich.css";
-import { type MaybeRefOrGetter, ref, shallowRef, toValue, watch } from "vue";
-import { isDark } from "@/shared/isDark";
 
 const twoslash = shallowRef();
 const transformerTwoslash = shallowRef();

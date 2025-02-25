@@ -1,11 +1,11 @@
 <script setup lang="ts">
-import { RouterView, useRouter } from "vue-router";
+import { isDark } from "@/shared/isDark";
 import { useToggle } from "@vueuse/core";
 import { ref, watch } from "vue";
+import { RouterView, useRouter } from "vue-router";
 import { version } from "../../package.json";
 import IconButton from "./components/IconButton.vue";
 import ToggleBar from "./components/ToggleBar.vue";
-import { isDark } from "@/shared/isDark";
 
 const toggle = useToggle(isDark);
 

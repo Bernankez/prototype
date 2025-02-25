@@ -1,4 +1,5 @@
-import { type MaybeRefOrGetter, type Ref, computed, isRef, toValue, watch } from "vue";
+import type { MaybeRefOrGetter, Ref } from "vue";
+import { computed, isRef, toValue, watch } from "vue";
 
 export function useMergedState<T>(controlledRef: MaybeRefOrGetter<T | undefined>, uncontrolledRef: Ref<T>, onSet?: (value: T) => void) {
   watch(() => toValue(controlledRef), (value) => {
@@ -17,6 +18,7 @@ export function useMergedState<T>(controlledRef: MaybeRefOrGetter<T | undefined>
     },
     set(value) {
       if (isRef(controlledRef)) {
+        // @ts-expect-error ignore
         controlledRef.value = value;
       }
       onSet?.(value);

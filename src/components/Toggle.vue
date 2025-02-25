@@ -61,9 +61,7 @@ const modelValue = useMergedState(controlled, uncontrolled);
 
 <style scoped>
 .toggle-wrapper {
-  --button-toggle-offset: calc(
-    (v-bind("props.height") - v-bind("props.toggleDiameter")) / 2
-  );
+  --button-toggle-offset: calc((v-bind("props.height") - v-bind("props.toggleDiameter")) / 2);
   --toggle-shadow-offset: 10px;
 }
 
@@ -89,8 +87,7 @@ const modelValue = useMergedState(controlled, uncontrolled);
   height: v-bind("props.toggleDiameter");
   border-radius: calc(v-bind("props.toggleDiameter") / 2);
   background-color: #fff;
-  box-shadow: var(--toggle-shadow-offset) 0
-    calc(var(--toggle-shadow-offset) * 4) rgb(0 0 0 / 10%);
+  box-shadow: var(--toggle-shadow-offset) 0 calc(var(--toggle-shadow-offset) * 4) rgb(0 0 0 / 10%);
   transform: translateX(var(--button-toggle-offset));
   transition: 0.3s all ease-in-out;
   content: "";
@@ -105,14 +102,8 @@ const modelValue = useMergedState(controlled, uncontrolled);
 }
 
 .toggle-checkbox:checked + span::after {
-  box-shadow: calc(var(--toggle-shadow-offset) * -1) 0
-    calc(var(--toggle-shadow-offset) * 4) rgb(0 0 0 / 10%);
-  transform: translateX(
-    calc(
-      v-bind("props.width") - v-bind("props.toggleDiameter") -
-        var(--button-toggle-offset)
-    )
-  );
+  box-shadow: calc(var(--toggle-shadow-offset) * -1) 0 calc(var(--toggle-shadow-offset) * 4) rgb(0 0 0 / 10%);
+  transform: translateX(calc(v-bind("props.width") - v-bind("props.toggleDiameter") - var(--button-toggle-offset)));
 }
 
 .toggle-enabled:active + span::after {
@@ -120,12 +111,7 @@ const modelValue = useMergedState(controlled, uncontrolled);
 }
 
 .toggle-enabled:checked:active + span::after {
-  transform: translateX(
-    calc(
-      v-bind("props.width") - v-bind("props.toggleWider") -
-        var(--button-toggle-offset)
-    )
-  );
+  transform: translateX(calc(v-bind("props.width") - v-bind("props.toggleWider") - var(--button-toggle-offset)));
 }
 
 .toggle-background-dark {

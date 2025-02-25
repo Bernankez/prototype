@@ -94,9 +94,9 @@ const collapsed = useMergedState(controlled, uncontrolled);
   font-size: 1.25rem;
   transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
   transition-duration: 150ms;
-  transition-property: color, background-color, border-color, outline-color,
-    text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter,
-    backdrop-filter;
+  transition-property:
+    color, background-color, border-color, outline-color, text-decoration-color, fill, stroke, opacity, box-shadow,
+    transform, filter, backdrop-filter;
 }
 
 .content {

@@ -1,9 +1,10 @@
 <script setup lang="ts">
-import { type Component, ref, shallowRef, watchEffect } from "vue";
+import type { Component } from "vue";
+import { useHighlighter } from "@/composables/useHighlighter";
 import { refAutoReset, useClipboard } from "@vueuse/core";
+import { ref, shallowRef, watchEffect } from "vue";
 import Collapse from "./Collapse.vue";
 import IconButton from "./IconButton.vue";
-import { useHighlighter } from "@/composables/useHighlighter";
 
 const props = defineProps<{
   name: string;

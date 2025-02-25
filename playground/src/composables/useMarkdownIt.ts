@@ -1,8 +1,9 @@
-import markdownit from "markdown-it";
-// @ts-expect-error no type definition
-import markdownKatex from "markdown-it-katex";
+import type { MaybeRefOrGetter } from "vue";
 import Shikiji from "@shikijs/markdown-it";
-import { type MaybeRefOrGetter, computed, ref, shallowRef, toValue } from "vue";
+import markdownit from "markdown-it";
+// @ts-expect-error no type def
+import markdownKatex from "markdown-it-katex";
+import { computed, ref, shallowRef, toValue } from "vue";
 
 const markdownIt = shallowRef<markdownit>();
 const loaded = ref(false);
@@ -41,7 +42,7 @@ export function useMarkdownIt() {
   function codeToHtml(code: MaybeRefOrGetter<string | undefined>) {
     return computed(() => {
       // trigger when loaded
-      // eslint-disable-next-line no-unused-expressions
+      // eslint-disable-next-line ts/no-unused-expressions
       loaded.value;
       if (!toValue(code)) {
         return "";
