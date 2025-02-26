@@ -1,10 +1,13 @@
 <script setup lang="ts">
 import { Split } from "@bernankez/prototype";
+import { ref } from "vue";
+
+const size = ref("200px");
 </script>
 
 <template>
   <div class="h-100 w-full b-1 b-border b-solid">
-    <Split class="h-full w-full">
+    <Split v-model:size="size" min="100px" :max="0.8" class="h-full w-full">
       <template #1>
         <div class="h-full w-full bg-yellow-1">
           Area1

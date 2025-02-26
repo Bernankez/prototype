@@ -1,6 +1,7 @@
 <script setup lang="ts">
-import { useEventListener } from "@vueuse/core";
-import { computed, ref } from "vue";
+import { useEventListener, useResizeObserver } from "@vueuse/core";
+import { computed, ref, useTemplateRef } from "vue";
+import { useDisplayDirective } from "../composables/useDisplayDirective";
 import { useMergedState } from "../composables/useMergedState";
 
 const props = withDefaults(defineProps<{
@@ -9,14 +10,26 @@ const props = withDefaults(defineProps<{
   resizeTriggerSize?: number;
   /** 分割条可触发拖动区域大小 */
   resizeTriggerDraggingSize?: number;
+  /**
+   * 最小尺寸
+   * string - 为string时，单位px - '230px' | '230'
+   * number - 为number时，作为百分比 - 0.23（23%）
+   */
   min?: number | string;
+  /**
+   * 最大尺寸
+   * string - 为string时，单位px - '230px' | '230'
+   * number - 为number时，作为百分比 - 0.23（23%）
+   */
   max?: number | string;
+  displayDirective?: "if" | "show";
 }>(), {
   direction: "horizontal",
   resizeTriggerSize: 8,
   resizeTriggerDraggingSize: 6,
   min: 0,
   max: 1,
+  displayDirective: "if",
 });
 
 const cursor = computed(() => props.direction === "vertical" ? "ns-resize" : "ew-resize");
@@ -150,7 +163,7 @@ function depx(px: string | number) {
   return px;
 }
 
-function updateSize(e: MouseEvent) {
+function updateSize(e?: MouseEvent) {
   const containerRect = resizeTriggerRef.value?.parentElement?.getBoundingClientRect();
   if (!containerRect) {
     return;
@@ -164,10 +177,17 @@ function updateSize(e: MouseEvent) {
           ? containerUsableWidth
           : containerUsableHeight;
 
-  const newPxSize
+  let newPxSize: number;
+  if (e) {
+    newPxSize
         = direction === "horizontal"
-          ? e.clientX - containerRect.left - offset.value
-          : e.clientY - containerRect.top + offset.value;
+        ? e.clientX - containerRect.left - offset.value
+        : e.clientY - containerRect.top + offset.value;
+  } else if (typeof size.value === "string") {
+    newPxSize = depx(size.value);
+  } else {
+    newPxSize = size.value * containerUsableSize;
+  }
 
   const { min, max } = props;
 
@@ -187,14 +207,31 @@ function updateSize(e: MouseEvent) {
     size.value = nextPxSize / containerUsableSize;
   }
 }
+
+const wrapperElRef = useTemplateRef("wrapperElRef");
+
+useResizeObserver(wrapperElRef, () => {
+  updateSize();
+});
+
+const uncontrolledCollapsed = ref(false);
+const controlledCollapsed = defineModel<boolean>("collapsed", {
+  default: undefined,
+});
+const collapsed = useMergedState(controlledCollapsed, uncontrolledCollapsed);
+const { showValue, ifValue } = useDisplayDirective(() => !collapsed.value, () => props.displayDirective);
+
+defineExpose({
+  updateSize,
+});
 </script>
 
 <template>
-  <div class="flex" :class="[direction === 'vertical' ? 'flex-col' : '']">
-    <div :style="slot1Style" class="w-full overflow-auto">
+  <div ref="wrapperElRef" class="flex" :class="[direction === 'vertical' ? 'flex-col' : '']">
+    <div v-if="ifValue" v-show="showValue" :style="slot1Style" class="w-full overflow-auto">
       <slot name="1"></slot>
     </div>
-    <div ref="resizeTriggerRef" :style="{ ...resizeWrapperStyle, ...resizeWrapperDraggingStyle, cursor }" class="group resize-trigger-wrapper relative flex shrink-0 grow-0 items-center" :class="[props.direction === 'vertical' && 'flex-col']" @mousedown="onMouseDown">
+    <div v-if="ifValue" v-show="showValue" ref="resizeTriggerRef" :style="{ ...resizeWrapperStyle, ...resizeWrapperDraggingStyle, cursor }" class="group resize-trigger-wrapper relative flex shrink-0 grow-0 items-center" :class="[props.direction === 'vertical' && 'flex-col']" @mousedown="onMouseDown">
       <slot name="resize-trigger" :dragging>
         <div class="rounded-full bg-muted-foreground bg-opacity-50 transition-200 transition-all group-hover:bg-opacity-80" :class="[props.direction === 'vertical' ? 'w-12 h-full' : 'h-12 w-full', dragging ? props.direction === 'vertical' ? 'w-15 bg-opacity-80' : 'h-15 bg-opacity-80' : '']"></div>
       </slot>
